@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>EasyDownloading</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"><script src="include.js"></script>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> <link rel="icon" href="ico/ico.jpg">
+    <link rel="stylesheet" type="text/css" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" src="main.js"></script>
+    <link rel="stylesheet" type="text/css" href="inner.css">
+    <script type="text/javascript" src="head\theme.js"></script>
+    <link rel="stylesheet" href="head\header.css">
+    <link rel="stylesheet" href="head\sidebar.css">
+    <link rel="stylesheet" type="text/css" href="head\content.css">
+    <link rel="stylesheet" type="text/css" href="head\footer.css">
+    <link rel="stylesheet" href="head\mobile.css">
+
+    <style>
+         ::-webkit-scrollbar {
+            display: none
+        }
+    </style>
+    <script type="text/javascript">
+        
+    </script>
+</head>
+
+<body>
+
+    <header id='mainHeader' include='Header'>
+        
+    </header>
+    <!-- Sidebar -->
+    <aside id="mainSidebar" include='Sidebar'>
+        <h2>Sidebar</h2>
+    </aside>
+
+    <!-- contents -->
+    <section id="main" accesskey="ESC" onclick="sidebarClose()">
+        <!-- <div id="mainContents" w3-include-html="home.html"> -->
+
+        <iframe src="home.html"
+        id="mainContent"
+        name="Iframe" 
+        hidden="false" 
+        seamless="true"
+        allowfullscreen="false" 
+        title="Home"
+        onclick="open()">
+        Not Suported
+        </iframe>
+
+        <script>
+        </script>
+
+
+        <footer id="mainFooter" include='Footer'>
+            
+        </footer>
+
+    </section>
+
+    <script>
+        var iframe = document.getElementById('mainContent');
+        var innerDoc = (iframe.contentDocument) ? iframe.contentDocument : iframe.contentWindow.document;
+        innerDoc.innherHTML = 'on';
+
+        var hourTheme = new Date().getHours();
+        if (hourTheme >= 21 || hourTheme <= 6) {
+            darkMode('#light')
+        }
+
+        function sidebarClose() {
+            var sbar = document.getElementById('sidebar');
+            var container = document.getElementById('main')
+            var micon = document.getElementById('menuIcon');
+            if (micon.className == "close") {
+                micon.classList.toggle('close');
+            }
+            sbar.style.width = "0px";
+            sbar.style.padding = "5px 0px";
+            container.style.filter = "blur(0px)brightness(100%)";
+            // container.style.marginLeft = '0px';    -> Off-canvas turned off
+
+        }
+    </script>
+
+
+    <script id="main">
+        var paging = sessionStorage.getItem('pageID');
+        page(paging);
+        page(paging);
+    /*    include('mainSidebar','iSidebar');
+        include('mainHeader','iHeader');
+        include('mainFooter','iFooter');
+*/
+    </script>
+    <script type="text/javascript" title="include">
+        
+        var allTags = document.getElementsByTagName("*");
+        for (var z = 0; z < allTags.length; z++) {
+            var theTag = allTags[z];
+            elmnt = theTag.hasAttribute("include")
+            if (elmnt) {
+                var atrName=theTag.getAttribute('include');
+                includes(theTag,atrName);
+            }
+        }
+
+    </script>
+</body>
+
+</html>
